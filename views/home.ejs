@@ -11,9 +11,10 @@
       (function () {
         var cities = ` + JSON.stringify(mapCities) + `;
         var map = L.map("map");
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
           maxZoom: 18,
-          attribution: "&copy; OpenStreetMap contributors",
+          subdomains: "abcd",
+          attribution: "&copy; <a href=\\"https://carto.com/attributions\\">CARTO</a>, &copy; OpenStreetMap contributors",
         }).addTo(map);
 
         var cluster = L.markerClusterGroup({ maxClusterRadius: 40 });
