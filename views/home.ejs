@@ -17,6 +17,25 @@
           attribution: "Tiles &copy; Esri",
         }).addTo(map);
 
+        fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
+          .then(function (r) { return r.json(); })
+          .then(function (geo) {
+            var wanted = ["Kosovo", "Albania", "North Macedonia", "Macedonia", "Serbia"];
+            var filtered = {
+              type: "FeatureCollection",
+              features: geo.features.filter(function (f) {
+                var p = f.properties || {};
+                var name = p.ADMIN || p.name || p.NAME || "";
+                return wanted.indexOf(name) !== -1;
+              }),
+            };
+            L.geoJSON(filtered, {
+              style: { color: "#b3492b", weight: 2, fill: false },
+              interactive: false,
+            }).addTo(map);
+          })
+          .catch(function () {});
+
         var cluster = L.markerClusterGroup({ maxClusterRadius: 40 });
         var bounds = [];
         cities.forEach(function (city) {
