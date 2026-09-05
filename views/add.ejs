@@ -24,10 +24,14 @@
         Qyteti
         <select name="city" required>
           <option value="" disabled <%= !values.city ? "selected" : "" %>>Zgjidh qytetin</option>
-          <% cities.forEach(function(city) { %>
-            <option value="<%= city.slug %>" <%= values.city === city.slug ? "selected" : "" %>>
-              <%= city.label %>
-            </option>
+          <% countries.forEach(function(country) { %>
+            <optgroup label="<%= country.label %>">
+              <% cities.filter(function(c){ return c.country === country.slug; }).forEach(function(city) { %>
+                <option value="<%= city.slug %>" <%= values.city === city.slug ? "selected" : "" %>>
+                  <%= city.label %>
+                </option>
+              <% }) %>
+            </optgroup>
           <% }) %>
         </select>
       </label>

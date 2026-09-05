@@ -6,5 +6,6 @@
   <title><%= typeof title !== "undefined" ? title : siteName %></title>
   <meta name="description" content="Drejtori e zejtarëve dhe punëtorëve lokalë në Preshevë — gjeni elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e dhe zanate të tjera." />
   <link rel="stylesheet" href="/css/style.css" />
+  <%- typeof extraHead !== "undefined" ? extraHead : "" %>
 </head>
 <body>

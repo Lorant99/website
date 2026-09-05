@@ -1,24 +1,67 @@
-<%- include("partials/head", { title: siteName }) %>
+<%
+  var extraHead = `
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css" />
+  `;
+  var extraScripts = `
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+    <script>
+      (function () {
+        var cities = ` + JSON.stringify(mapCities) + `;
+        var map = L.map("map");
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+
+        var cluster = L.markerClusterGroup({ maxClusterRadius: 40 });
+        var bounds = [];
+        cities.forEach(function (city) {
+          var marker = L.marker([city.lat, city.lng]);
+          marker.bindPopup(
+            "<strong>" + city.label + "</strong><br>" +
+            city.count + " të regjistruar<br>" +
+            "<a href=\\"/qyteti/" + city.slug + "\\">Shiko zanatet &rarr;</a>"
+          );
+          cluster.addLayer(marker);
+          bounds.push([city.lat, city.lng]);
+        });
+        map.addLayer(cluster);
+        if (bounds.length) map.fitBounds(bounds, { padding: [20, 20] });
+      })();
+    </` + `script>
+  `;
+%>
+<%- include("partials/head", { title: siteName, extraHead: extraHead }) %>
 <%- include("partials/header") %>
 
 <main class="wrap">
   <section class="hero">
     <h1><%= siteName %></h1>
     <p class="lead">
-      Zgjidh qytetin tënd që të gjesh elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e
-      dhe zanate të tjera lokale. Kur diaspora vjen në shtëpi dhe ka nevojë për dikë, ta dijë kë të thërrasë.
+      Kliko qytetin tënd në hartë — në Kosovë, Shqipëri, Maqedoninë e Veriut apo Luginën e Preshevës —
+      që të gjesh elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e dhe zanate të tjera lokale atje.
     </p>
   </section>
 
-  <div class="cat-grid">
-    <% cities.forEach(function(city) { %>
-      <a class="cat-card" href="/qyteti/<%= city.slug %>">
-        <span class="icon">📍</span>
-        <span class="label"><%= city.label %></span>
-        <span class="count"><%= counts[city.slug] || 0 %> të regjistruar</span>
-      </a>
-    <% }) %>
-  </div>
+  <div id="map" class="map-box"></div>
+
+  <p style="color:var(--muted);font-size:0.85rem;margin:10px 0 30px;">
+    Nuk sheh dot hartën ose je në celular me lidhje të dobët? Zgjidh qytetin nga lista më poshtë.
+  </p>
+
+  <% countries.forEach(function(country) { %>
+    <details class="country-list">
+      <summary><%= country.label %></summary>
+      <div class="city-links">
+        <% cities.filter(function(c){ return c.country === country.slug; }).forEach(function(city) { %>
+          <a href="/qyteti/<%= city.slug %>"><%= city.label %></a>
+        <% }) %>
+      </div>
+    </details>
+  <% }) %>
 </main>
 
-<%- include("partials/footer") %>
+<%- include("partials/footer", { extraScripts: extraScripts }) %>

@@ -7,7 +7,9 @@
   <div class="section-title">
     <h1>📍 <%= city.label %></h1>
   </div>
-  <p style="color:var(--muted);margin:0 0 8px;">Zgjidh zanatin që kërkon.</p>
+  <p style="color:var(--muted);margin:0 0 8px;">
+    <%= countries.find(function(c){ return c.slug === city.country; }).label %> — Zgjidh zanatin që kërkon.
+  </p>
 
   <div class="cat-grid">
     <% categories.forEach(function(cat) { %>

@@ -5,6 +5,7 @@ const path = require("path");
 
 const categories = require("./config/categories");
 const cities = require("./config/cities");
+const countries = require("./config/countries");
 const db = require("./lib/db");
 
 const app = express();
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
   res.locals.siteName = SITE_NAME;
   res.locals.categories = categories;
   res.locals.cities = cities;
+  res.locals.countries = countries;
   next();
 });
 
@@ -35,7 +37,15 @@ function findCity(slug) {
 
 app.get("/", (req, res) => {
   const counts = db.countByCity();
-  res.render("home", { counts });
+  const mapCities = cities.map((c) => ({
+    slug: c.slug,
+    label: c.label,
+    country: c.country,
+    lat: c.lat,
+    lng: c.lng,
+    count: counts[c.slug] || 0,
+  }));
+  res.render("home", { mapCities });
 });
 
 app.get("/qyteti/:citySlug", (req, res) => {
