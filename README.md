@@ -1,4 +1,4 @@
-# Preshevë Lidh
+# Ku Je
 
 A small directory site for Presheva (Preševo): a place where local tradespeople —
 electricians, plumbers, tilers, gardeners, cleaners, and other trades — can list

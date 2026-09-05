@@ -100,7 +100,7 @@ function basicAuth(req, res, next) {
     const [user, pass] = Buffer.from(encoded, "base64").toString().split(":");
     if (user === ADMIN_USER && pass === ADMIN_PASS) return next();
   }
-  res.set("WWW-Authenticate", 'Basic realm="Preshevë Lidh Admin"');
+  res.set("WWW-Authenticate", 'Basic realm="Ku Je Admin"');
   return res.status(401).send("Autentikim i kërkuar.");
 }
 
@@ -118,5 +118,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Preshevë Lidh po punon në http://localhost:${PORT}`);
+  console.log(`Ku Je po punon në http://localhost:${PORT}`);
 });

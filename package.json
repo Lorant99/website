@@ -1,7 +1,7 @@
 {
-  "name": "preshevalidh",
+  "name": "kuje",
   "version": "1.0.0",
-  "description": "Preshevë Lidh — a directory of local tradespeople in Presheva, so the diaspora knows who to call.",
+  "description": "Ku Je — a directory of local tradespeople in Presheva, so the diaspora knows who to call.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
