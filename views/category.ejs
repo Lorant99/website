@@ -1,27 +1,18 @@
-<%- include("partials/head", { title: category.label + " — Ku Je" }) %>
+<%- include("partials/head", { title: category.label + " në " + city.label + " — " + siteName }) %>
 <%- include("partials/header") %>
 
 <main class="wrap">
-  <a class="back-link" href="/">&larr; Të gjitha zanatet</a>
+  <a class="back-link" href="/qyteti/<%= city.slug %>">&larr; <%= city.label %> — të gjitha zanatet</a>
 
   <div class="section-title">
-    <h1><%= category.icon %> <%= category.label %></h1>
-    <a class="btn" href="/shto?kategoria=<%= category.slug %>">+ Shto veten këtu</a>
+    <h1><%= category.icon %> <%= category.label %> — <%= city.label %></h1>
+    <a class="btn" href="/shto?qyteti=<%= city.slug %>&kategoria=<%= category.slug %>">+ Shto veten këtu</a>
   </div>
-
-  <form class="filter-form" method="get">
-    <input type="text" name="qytet" placeholder="Filtro sipas qytetit / fshatit…" value="<%= cityFilter %>" />
-    <button type="submit">Filtro</button>
-  </form>
 
   <% if (listings.length === 0) { %>
     <div class="empty-state">
-      <% if (cityFilter) { %>
-        <p>Nuk u gjet askush për "<%= cityFilter %>" në <%= category.label.toLowerCase() %>.</p>
-      <% } else { %>
-        <p>Ende s'ka të regjistruar në këtë zanat. Bëhu i pari!</p>
-      <% } %>
-      <a class="btn" href="/shto?kategoria=<%= category.slug %>">+ Shto veten</a>
+      <p>Ende s'ka të regjistruar në <%= category.label.toLowerCase() %> për <%= city.label %>. Bëhu i pari!</p>
+      <a class="btn" href="/shto?qyteti=<%= city.slug %>&kategoria=<%= category.slug %>">+ Shto veten</a>
     </div>
   <% } else { %>
     <div class="listing-grid">
@@ -29,7 +20,7 @@
         <div class="listing-card">
           <div class="who">
             <div class="name"><%= l.name %></div>
-            <div class="city"><%= l.city %></div>
+            <div class="city"><%= city.label %></div>
             <% if (l.note) { %><div class="note"><%= l.note %></div><% } %>
           </div>
           <a class="btn call" href="tel:<%= l.phone.replace(/\s+/g, '') %>">📞 <%= l.phone %></a>

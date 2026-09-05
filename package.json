@@ -1,7 +1,7 @@
 {
   "name": "kuje",
   "version": "1.0.0",
-  "description": "Ku Je — a directory of local tradespeople in Presheva, so the diaspora knows who to call.",
+  "description": "Gjeje personin për problemin tënd në qytetin tënd — a directory of local tradespeople in Presheva, so the diaspora knows who to call.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

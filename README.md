@@ -1,4 +1,4 @@
-# Ku Je
+# Gjeje personin për problemin tënd në qytetin tënd
 
 A small directory site for Presheva (Preševo): a place where local tradespeople —
 electricians, plumbers, tilers, gardeners, cleaners, and other trades — can list
@@ -29,16 +29,18 @@ Visit http://localhost:3000.
 
 ## Pages
 
-- `/` — all trade categories with counts
-- `/kategoria/:slug` — listings for one trade, filterable by city
-- `/shto` — form to add yourself to a category
+- `/` — pick your city
+- `/qyteti/:citySlug` — trade categories for that city, with counts
+- `/qyteti/:citySlug/kategoria/:catSlug` — listings for one trade in that city
+- `/shto` — form to add yourself (pick city + trade)
 - `/admin` — password-protected (HTTP Basic Auth via `ADMIN_USER`/`ADMIN_PASS`
   in `.env`) table of every listing, with delete, for removing spam or
   outdated entries
 
-## Adding a new trade category
+## Adding a new trade category or city
 
-Edit `config/categories.js` — every other page picks the list up automatically.
+Edit `config/categories.js` or `config/cities.js` — every other page picks
+the list up automatically.
 
 ## Deploying
 

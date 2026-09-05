@@ -1,0 +1,23 @@
+<%- include("partials/head", { title: city.label + " — " + siteName }) %>
+<%- include("partials/header") %>
+
+<main class="wrap">
+  <a class="back-link" href="/">&larr; Zgjidh një qytet tjetër</a>
+
+  <div class="section-title">
+    <h1>📍 <%= city.label %></h1>
+  </div>
+  <p style="color:var(--muted);margin:0 0 8px;">Zgjidh zanatin që kërkon.</p>
+
+  <div class="cat-grid">
+    <% categories.forEach(function(cat) { %>
+      <a class="cat-card" href="/qyteti/<%= city.slug %>/kategoria/<%= cat.slug %>">
+        <span class="icon"><%= cat.icon %></span>
+        <span class="label"><%= cat.label %></span>
+        <span class="count"><%= counts[cat.slug] || 0 %> të regjistruar</span>
+      </a>
+    <% }) %>
+  </div>
+</main>
+
+<%- include("partials/footer") %>

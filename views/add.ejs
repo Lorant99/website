@@ -1,4 +1,4 @@
-<%- include("partials/head", { title: "Shto veten — Ku Je" }) %>
+<%- include("partials/head", { title: "Shto veten — " + siteName }) %>
 <%- include("partials/header") %>
 
 <main class="wrap">
@@ -6,8 +6,8 @@
     <div class="success-box">
       <div class="icon">✅</div>
       <h1>U regjistrua!</h1>
-      <p>Tani jeni në listën e "<%= category.label %>". Faleminderit që kontribuoni!</p>
-      <a class="btn" href="/kategoria/<%= category.slug %>">Shiko listën</a>
+      <p>Tani jeni në listën e "<%= category.label %>" për <%= city.label %>. Faleminderit që kontribuoni!</p>
+      <a class="btn" href="/qyteti/<%= city.slug %>/kategoria/<%= category.slug %>">Shiko listën</a>
     </div>
   <% } else { %>
     <a class="back-link" href="/">&larr; Kthehu</a>
@@ -20,6 +20,18 @@
     <% } %>
 
     <form class="add-form" method="post" action="/shto">
+      <label>
+        Qyteti
+        <select name="city" required>
+          <option value="" disabled <%= !values.city ? "selected" : "" %>>Zgjidh qytetin</option>
+          <% cities.forEach(function(city) { %>
+            <option value="<%= city.slug %>" <%= values.city === city.slug ? "selected" : "" %>>
+              <%= city.label %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+
       <label>
         Zanati
         <select name="category" required>
@@ -35,16 +47,6 @@
       <label>
         Emri e mbiemri
         <input type="text" name="name" required maxlength="80" value="<%= values.name || '' %>" placeholder="p.sh. Agim Krasniqi" />
-      </label>
-
-      <label>
-        Qyteti / fshati
-        <input type="text" name="city" required maxlength="60" list="qytetet" value="<%= values.city || '' %>" placeholder="p.sh. Preshevë, Cërnicë…" />
-        <datalist id="qytetet">
-          <option value="Preshevë"></option>
-          <option value="Bujanoci"></option>
-          <option value="Medvegja"></option>
-        </datalist>
       </label>
 
       <label>

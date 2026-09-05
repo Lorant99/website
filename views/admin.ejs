@@ -1,4 +1,4 @@
-<%- include("partials/head", { title: "Admin — Ku Je" }) %>
+<%- include("partials/head", { title: "Admin — " + siteName }) %>
 <%- include("partials/header") %>
 
 <main class="wrap">
@@ -8,9 +8,9 @@
   <table class="admin-table">
     <thead>
       <tr>
+        <th>Qyteti</th>
         <th>Zanati</th>
         <th>Emri</th>
-        <th>Qyteti</th>
         <th>Telefoni</th>
         <th>Shënim</th>
         <th>Data</th>
@@ -18,12 +18,14 @@
       </tr>
     </thead>
     <tbody>
-      <% listings.forEach(function(l) { %>
+      <% listings.forEach(function(l) {
+        var cat = categories.find(function(c) { return c.slug === l.category; });
+        var cty = cities.find(function(c) { return c.slug === l.city; });
+      %>
         <tr>
-          <td><%= l.category %></td>
+          <td><%= cty ? cty.label : l.city %></td>
+          <td><%= cat ? cat.label : l.category %></td>
           <td><%= l.name %></td>
-          <td><%= l.city %></td>
-          <td><%= l.phone %></td>
           <td><%= l.note %></td>
           <td><%= new Date(l.createdAt).toLocaleDateString('sq') %></td>
           <td>
