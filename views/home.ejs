@@ -1,0 +1,26 @@
+<%- include("partials/head", { title: "Preshevë Lidh — Gjej zejtarin lokal" }) %>
+<%- include("partials/header") %>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Kë të thërrasësh në Preshevë?</h1>
+    <p class="lead">
+      Një listë e thjeshtë me emra, qytete dhe numra telefoni të zejtarëve e punëtorëve lokalë —
+      elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e dhe të tjerë. Kur diaspora vjen në shtëpi
+      dhe ka nevojë për dikë, ta dijë kë të thërrasë.
+    </p>
+    <p class="sub">A vendlist of local tradespeople in Presheva — so the diaspora always knows who to call.</p>
+  </section>
+
+  <div class="cat-grid">
+    <% categories.forEach(function(cat) { %>
+      <a class="cat-card" href="/kategoria/<%= cat.slug %>">
+        <span class="icon"><%= cat.icon %></span>
+        <span class="label"><%= cat.label %></span>
+        <span class="count"><%= counts[cat.slug] || 0 %> të regjistruar</span>
+      </a>
+    <% }) %>
+  </div>
+</main>
+
+<%- include("partials/footer") %>

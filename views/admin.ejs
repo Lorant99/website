@@ -1,0 +1,40 @@
+<%- include("partials/head", { title: "Admin — Preshevë Lidh" }) %>
+<%- include("partials/header") %>
+
+<main class="wrap">
+  <h1>Menaxho regjistrimet</h1>
+  <p><%= listings.length %> regjistrime gjithsej.</p>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Zanati</th>
+        <th>Emri</th>
+        <th>Qyteti</th>
+        <th>Telefoni</th>
+        <th>Shënim</th>
+        <th>Data</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% listings.forEach(function(l) { %>
+        <tr>
+          <td><%= l.category %></td>
+          <td><%= l.name %></td>
+          <td><%= l.city %></td>
+          <td><%= l.phone %></td>
+          <td><%= l.note %></td>
+          <td><%= new Date(l.createdAt).toLocaleDateString('sq') %></td>
+          <td>
+            <form method="post" action="/admin/fshij/<%= l.id %>" onsubmit="return confirm('Fshi këtë regjistrim?');">
+              <button type="submit" class="btn secondary">Fshi</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</main>
+
+<%- include("partials/footer") %>

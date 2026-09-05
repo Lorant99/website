@@ -1,0 +1,42 @@
+<%- include("partials/head", { title: category.label + " — Preshevë Lidh" }) %>
+<%- include("partials/header") %>
+
+<main class="wrap">
+  <a class="back-link" href="/">&larr; Të gjitha zanatet</a>
+
+  <div class="section-title">
+    <h1><%= category.icon %> <%= category.label %></h1>
+    <a class="btn" href="/shto?kategoria=<%= category.slug %>">+ Shto veten këtu</a>
+  </div>
+
+  <form class="filter-form" method="get">
+    <input type="text" name="qytet" placeholder="Filtro sipas qytetit / fshatit…" value="<%= cityFilter %>" />
+    <button type="submit">Filtro</button>
+  </form>
+
+  <% if (listings.length === 0) { %>
+    <div class="empty-state">
+      <% if (cityFilter) { %>
+        <p>Nuk u gjet askush për "<%= cityFilter %>" në <%= category.label.toLowerCase() %>.</p>
+      <% } else { %>
+        <p>Ende s'ka të regjistruar në këtë zanat. Bëhu i pari!</p>
+      <% } %>
+      <a class="btn" href="/shto?kategoria=<%= category.slug %>">+ Shto veten</a>
+    </div>
+  <% } else { %>
+    <div class="listing-grid">
+      <% listings.forEach(function(l) { %>
+        <div class="listing-card">
+          <div class="who">
+            <div class="name"><%= l.name %></div>
+            <div class="city"><%= l.city %></div>
+            <% if (l.note) { %><div class="note"><%= l.note %></div><% } %>
+          </div>
+          <a class="btn call" href="tel:<%= l.phone.replace(/\s+/g, '') %>">📞 <%= l.phone %></a>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</main>
+
+<%- include("partials/footer") %>
