@@ -94,7 +94,7 @@ app.post("/shto", addLimiter, async (req, res) => {
     return res.status(400).render("add", { error: "Zgjidhni qytetin.", values, submitted: false });
   }
   if (!cat) {
-    return res.status(400).render("add", { error: "Zgjidhni një zanat të vlefshëm.", values, submitted: false });
+    return res.status(400).render("add", { error: "Zgjidhni një profesion të vlefshëm.", values, submitted: false });
   }
   if (!name || name.trim().length < 2) {
     return res.status(400).render("add", { error: "Shkruani emrin.", values, submitted: false });

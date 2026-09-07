@@ -37,9 +37,9 @@
       </label>
 
       <label>
-        Zanati
+        Profesioni
         <select name="category" required>
-          <option value="" disabled <%= !values.category ? "selected" : "" %>>Zgjidh zanatin</option>
+          <option value="" disabled <%= !values.category ? "selected" : "" %>>Zgjidh profesionin</option>
           <% categories.forEach(function(cat) { %>
             <option value="<%= cat.slug %>" <%= values.category === cat.slug ? "selected" : "" %>>
               <%= cat.icon %> <%= cat.label %>

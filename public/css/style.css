@@ -406,3 +406,17 @@ table.admin-table form { margin: 0; }
   background: var(--brand);
   color: #fff;
 }
+
+.city-name-label {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  box-shadow: 0 1px 3px rgba(35, 32, 27, 0.25);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #23201b;
+  padding: 1px 6px;
+}
+
+.city-name-label::before {
+  display: none;
+}

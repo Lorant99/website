@@ -43,8 +43,14 @@
           marker.bindPopup(
             "<strong>" + city.label + "</strong><br>" +
             city.count + " të regjistruar<br>" +
-            "<a href=\\"/qyteti/" + city.slug + "\\">Shiko zanatet &rarr;</a>"
+            "<a href=\\"/qyteti/" + city.slug + "\\">Shiko profesionet &rarr;</a>"
           );
+          marker.bindTooltip(city.label, {
+            permanent: true,
+            direction: "right",
+            offset: [8, 0],
+            className: "city-name-label",
+          });
           cluster.addLayer(marker);
           bounds.push([city.lat, city.lng]);
         });
@@ -62,7 +68,7 @@
     <h1><%= siteName %></h1>
     <p class="lead">
       Kliko qytetin tënd në hartë — në Kosovë, Shqipëri, Maqedoninë e Veriut apo Luginën e Preshevës —
-      që të gjesh elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e dhe zanate të tjera lokale atje.
+      që të gjesh elektricist, hidraulik, pllakaxhi, kopshtar, pastrues/e dhe profesione të tjera lokale atje.
     </p>
   </section>
 
